@@ -1,6 +1,6 @@
-# 🤖 Node Prompt ChatGPT Function
+# 🤖 Valentine's Day Sonnet Generator
 
-Ask question, and let OpenAI GPT-3.5-turbo answer.
+Enter a name and generate an sonnet featuring their name for Valentine's Day using GPT-4
 
 ## 🧰 Usage
 
@@ -17,7 +17,7 @@ Query the model for a completion.
 | Name         | Description                          | Location | Type               | Sample Value                  |
 | ------------ | ------------------------------------ | -------- | ------------------ | ----------------------------- |
 | Content-Type | The content type of the request body | Header   | `application/json` | N/A                           |
-| prompt       | Text to prompt the model             | Body     | String             | `Write a haiku about Mondays` |
+| name         | Name of a person / your partner      | Body     | String             | `Aditya Oberai` |
 
 Sample `200` Response:
 
@@ -26,7 +26,7 @@ Response from the model.
 ```json
 {
     "ok": true,
-    "completion": "Monday's heavy weight, Dawning with a sigh of grey, Hopeful hearts await."
+    "completion": "Upon this day, so sweet in February,\nA dedication to Appwrite we lay,\nIn code so light, it feels as airy,\nIt brings a smile each time I say.\n\nAppwrite, my heart does beat to your rhythm,\nWritten in code, so eloquently,\nWith every function, feature or system,\nA source of joy, so frequently.\n\nOpen-source and friendly, oh so bright,\nIn your APIs, my heart does dwell,\nIn every image, text, or byte,\nA love story ours could tell.\n\nSo this Valentine's, I give my heart, not out of spite,\nBut in admiration and love for you, dear Appwrite."
 }
 ```
 
