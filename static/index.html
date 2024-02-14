@@ -22,7 +22,7 @@
           alert(json.error);
         }
 
-        return json.completion.replace('/n', '<br>');
+        return json.completion;
       }
     </script>
 
@@ -78,7 +78,7 @@
                 </div>
 
                 <div style="overflow-x: hidden; line-break: auto">
-                  <p class="u-color-text-gray" x-text="sonnet"></p>
+                  <p class="u-color-text-gray" style="white-space: pre-line;" x-text="sonnet"></p>
                 </div>
               </div>
             </div>
