@@ -22,7 +22,7 @@
           alert(json.error);
         }
 
-        return json.completion;
+        return json.completion.replace('/n', '<br>');
       }
     </script>
 
@@ -74,10 +74,10 @@
             <div class="u-flex u-flex-vertical u-gap-12">
               <div class="u-flex u-flex-vertical u-gap-12 card">
                 <div class="u-flex u-gap-12">
-                  <h5 class="eyebrow-heading-2">ChatGPT:</h5>
+                  <h5 class="eyebrow-heading-2">Cupid:</h5>
                 </div>
 
-                <div style="overflow-x: hidden; line-break: anywhere">
+                <div style="overflow-x: hidden; line-break: auto">
                   <p class="u-color-text-gray" x-text="sonnet"></p>
                 </div>
               </div>
