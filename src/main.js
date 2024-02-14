@@ -1,7 +1,7 @@
 import { OpenAI } from 'openai';
 import { getStaticFile, throwIfMissing } from './utils.js';
 
-export default async ({ req, res }) => {
+export default async ({ req, res, log, error }) => {
   throwIfMissing(process.env, ['OPENAI_API_KEY']);
 
   if (req.method === 'GET') {
@@ -13,6 +13,7 @@ export default async ({ req, res }) => {
   try {
     throwIfMissing(req.body, ['name']);
   } catch (err) {
+    error(err.message);
     return res.json({ ok: false, error: err.message }, 400);
   }
 
@@ -21,14 +22,16 @@ export default async ({ req, res }) => {
     });
 
   try {
-    const response = await openai.chat.completions({
+    const response = await openai.chat.completions.create({
       model: 'gpt-4',
       max_tokens: parseInt(process.env.OPENAI_MAX_TOKENS ?? '512'),
       messages: [{ role: 'user', content: `Write a romantic Valentine\'s Day sonnet dedicated to ${req.body.name}` }],
     });
-    const completion = response.data.choices[0].message?.content;
+    const completion = response.choices[0];
+    log(completion);
     return res.json({ ok: true, completion }, 200);
   } catch (err) {
-    return res.json({ ok: false, error: 'Failed to query model.' }, 500);
+    error(err.message);
+    return res.json({ ok: false, error: err.message }, 500);
   }
 };
