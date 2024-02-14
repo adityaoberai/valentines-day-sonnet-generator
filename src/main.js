@@ -27,7 +27,7 @@ export default async ({ req, res, log, error }) => {
       max_tokens: parseInt(process.env.OPENAI_MAX_TOKENS ?? '512'),
       messages: [{ role: 'user', content: `Write a romantic Valentine\'s Day sonnet dedicated to ${req.body.name}` }],
     });
-    const completion = response.choices[0];
+    const completion = response.choices[0].message?.content;
     log(completion);
     return res.json({ ok: true, completion }, 200);
   } catch (err) {
