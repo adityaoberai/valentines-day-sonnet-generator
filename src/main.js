@@ -1,4 +1,4 @@
-import { OpenAIApi, Configuration } from 'openai';
+import { OpenAI } from 'openai';
 import { getStaticFile, throwIfMissing } from './utils.js';
 
 export default async ({ req, res }) => {
@@ -11,22 +11,20 @@ export default async ({ req, res }) => {
   }
 
   try {
-    throwIfMissing(req.body, ['prompt']);
+    throwIfMissing(req.body, ['name']);
   } catch (err) {
     return res.json({ ok: false, error: err.message }, 400);
   }
 
-  const openai = new OpenAIApi(
-    new Configuration({
+  const openai = new OpenAI({
       apiKey: process.env.OPENAI_API_KEY,
-    })
-  );
+    });
 
   try {
-    const response = await openai.createChatCompletion({
-      model: 'gpt-3.5-turbo',
+    const response = await openai.chat.completions({
+      model: 'gpt-4',
       max_tokens: parseInt(process.env.OPENAI_MAX_TOKENS ?? '512'),
-      messages: [{ role: 'user', content: req.body.prompt }],
+      messages: [{ role: 'user', content: `Write a romantic Valentine\'s Day sonnet dedicated to ${req.body.name}` }],
     });
     const completion = response.data.choices[0].message?.content;
     return res.json({ ok: true, completion }, 200);

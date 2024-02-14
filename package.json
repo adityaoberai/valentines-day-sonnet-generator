@@ -9,7 +9,7 @@
   },
   "keywords": [],
   "dependencies": {
-    "openai": "^3.3.0"
+    "openai": "^4.28.0"
   },
   "devDependencies": {
     "prettier": "^3.0.0"
