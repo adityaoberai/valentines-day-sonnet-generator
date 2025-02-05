@@ -42,6 +42,7 @@ export default async ({ req, res, log, error }) => {
     else if (req.path === '/message') {
       try {
         throwIfMissing(req.bodyJson, ['senderName', 'senderEmail', 'receiverName', 'receiverEmail', 'message']);
+        throwIfMissing(process.env, ['APPWRITE_DB_ID', 'APPWRITE_COLLECTION_ID'])
         
         const appwriteClient = new Client()
           .setProject(process.env.APPWRITE_FUNCTION_PROJECT_ID)
@@ -53,8 +54,8 @@ export default async ({ req, res, log, error }) => {
         const test = req.bodyJson.test ?? false;
 
         await appwriteDatabases.createDocument(
-          'messages',
-          'emails',
+          process.env.APPWRITE_DB_ID,
+          process.env.APPWRITE_COLLECTION_ID,
           ID.unique(),
           {
             senderName,
