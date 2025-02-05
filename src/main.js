@@ -51,7 +51,7 @@ export default async ({ req, res, log, error }) => {
 
         const { senderName, senderEmail, receiverName, receiverEmail, message } = req.bodyJson;
 
-        const savedMessage = await appwriteDatabases.createDocument(
+        await appwriteDatabases.createDocument(
           'messages',
           'emails',
           ID.unique(),
@@ -64,7 +64,7 @@ export default async ({ req, res, log, error }) => {
           }
         );
 
-        return res.json({ ok: true, data: savedMessage });
+        return res.json({ ok: true });
 
       } catch (err) {
         error(err.message);
