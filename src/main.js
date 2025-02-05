@@ -50,6 +50,7 @@ export default async ({ req, res, log, error }) => {
         const appwriteDatabases = new Databases(appwriteClient);
 
         const { senderName, senderEmail, receiverName, receiverEmail, message } = req.bodyJson;
+        const test = req.bodyJson.test ?? false;
 
         await appwriteDatabases.createDocument(
           'messages',
@@ -60,7 +61,8 @@ export default async ({ req, res, log, error }) => {
             senderEmail,
             receiverName,
             receiverEmail,
-            message
+            message,
+            test
           }
         );
 
